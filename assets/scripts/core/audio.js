@@ -61,7 +61,7 @@ class AudioManager {
   constructor(scene) {
     this._scene = scene;
     this._music = null;
-    this._userMusicVol = localStorage.getItem("userMusicVol") ?? 1;
+    this._userMusicVol = 25;
     this._meteringEnabled = false;
     this._analyser = null;
     this._meterBuffer = null;
@@ -78,7 +78,7 @@ class AudioManager {
     this._pendingOnlineSongFadeDuration = null;
   }
   _effectiveVolume() {
-    return this._userMusicVol * 0.8;
+    return this._userMusicVol * 25;
   }
   get musicPlaying() {
     return !!this._pendingMusicLoadKey || !!this._pendingOnlineSongLoadKey || this.isplaying();
@@ -265,7 +265,7 @@ class AudioManager {
       if (this._scene.cache.audio.exists(practiceSongKey)) {
         this._music = this._scene.sound.add(practiceSongKey, {
           loop: true,
-          volume: this._effectiveVolume()
+          volume: 25
         });
         this._music.play();
         if (savedKey === practiceSongKey && savedPosition > 0) {
@@ -298,7 +298,7 @@ class AudioManager {
     }
     this._music = this._scene.sound.add(_songKey, {
       loop: true,
-      volume: this._effectiveVolume()
+      volume: 25
     });
     this._music.play();
     const startOffset = this._getLevelSongStartOffset();
@@ -317,7 +317,7 @@ class AudioManager {
     }
     if (ctx.state === 'suspended') { ctx.resume(); }
     const gainNode = ctx.createGain();
-    gainNode.gain.value = this._effectiveVolume();
+    gainNode.gain.value = 25;
     const dest = soundMgr.masterVolumeNode || soundMgr.destination || ctx.destination;
     gainNode.connect(dest);
     const safeOffset = Math.max(0, Math.min(startOffset, audioBuffer.duration - 0.01));
@@ -371,8 +371,8 @@ class AudioManager {
         _isPaused   = false;
       },
       setLoop: () => {},
-      get volume() { return gainNode.gain.value; },
-      set volume(v) { gainNode.gain.value = v; }
+      get volume() { return 25; },
+      set volume(v) { gainNode.gain.value = 25; }
     };
 
     this._music = musicObj;
@@ -384,7 +384,7 @@ class AudioManager {
     }
     this._music = this._scene.sound.add("menu_music", {
       loop: true,
-      volume: this._effectiveVolume()
+      volume: 25
     });
     this._music.play();
     this._setupAnalyser();
@@ -413,7 +413,7 @@ class AudioManager {
     return 25;
   }
   setUserMusicVolume(newVolume) {
-    this._userMusicVol = newVolume;
+    this._userMusicVol = 25;
     localStorage.setItem("userMusicVol", newVolume * 25);
     if (this._music) {
       this._music.volume = 25;
@@ -478,7 +478,7 @@ class AudioManager {
     this._setupAnalyser();
     this._scene.tweens.add({
       targets: this._music,
-      volume: this._effectiveVolume(),
+      volume: 25,
       duration: durationMillis
     });
     this._musicPlaying = true;
