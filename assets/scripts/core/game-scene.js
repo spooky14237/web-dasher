@@ -9104,15 +9104,10 @@ _applyMirrorEffect() {
         });
     };
 
-    createSlider(sliderStartY - 15, "Music", this._audio.getUserMusicVolume(), v => this._audio.setUserMusicVolume(v));
-    createSlider(sliderStartY + 60, "SFX", this._sfxVolume, v => {
-        this._sfxVolume = v;
-        localStorage.setItem("userSfxVol", v);
-    });
+    
     const checkboxY = sliderStartY - 10;
     const checkboxX = containerX + 280;
-    this._settingsLayerInternal.add(this.add.bitmapText(checkboxX, checkboxY - 42, "bigFont", "Menu", 20).setOrigin(0.5, 0.5));
-    this._settingsLayerInternal.add(this.add.bitmapText(checkboxX, checkboxY - 22, "bigFont", "Music", 20).setOrigin(0.5, 0.5));
+    
 
     const getMenuMusicEnabled = () => {
         const saved = localStorage.getItem("menuMusicEnabled");
@@ -9121,22 +9116,9 @@ _applyMirrorEffect() {
     const setMenuMusicEnabled = (value) => localStorage.setItem("menuMusicEnabled", value);
     
     const getTex = () => getMenuMusicEnabled() ? "GJ_checkOn_001.png" : "GJ_checkOff_001.png";
-    const check = this.add.image(checkboxX, checkboxY + 15, "GJ_GameSheet03", getTex()).setScale(0.7).setInteractive();
+    const check = this.add.image(checkboxX, checkboxY + 15, "GJ_GameSheet03", getTex()).setScale(0.7).setInteractive().setTint(0x666666);
     this._settingsLayerInternal.add(check);
-    this._makeBouncyButton(check, 0.8, () => {
-        const newState = !getMenuMusicEnabled();
-        setMenuMusicEnabled(newState);
-        check.setTexture("GJ_GameSheet03", getTex());
-        if (newState) {
-            if (!this._audio.isplaying()) {
-                this._audio.startMenuMusic();
-            }
-        } else {
-            if (this._audio.isplaying()) {
-                this._audio.stopMusic();
-            }
-        }
-    });
+    this._makeBouncyButton(check, 0.8, () => {});
     const _0x45fc2b = [{
       frame: "GJ_arrow_03_001.png",
       dx: -535,
