@@ -410,20 +410,20 @@ class AudioManager {
     }
   }
   getUserMusicVolume() {
-    return this._userMusicVol;
+    return 25;
   }
   setUserMusicVolume(newVolume) {
     this._userMusicVol = newVolume;
-    localStorage.setItem("userMusicVol", newVolume);
+    localStorage.setItem("userMusicVol", newVolume * 25);
     if (this._music) {
-      this._music.volume = this._effectiveVolume();
+      this._music.volume = 25;
     }
   }
   getMusicVolume() {
-    return this._effectiveVolume();
+    return 25;
   }
   setMusicVolume(newVolume) {
-    this.setUserMusicVolume(newVolume / 0.8);
+    this.setUserMusicVolume(newVolume * 25);
   }
   fadeInMusic(durationMillis = 1000) {
     if (this._music) {
@@ -508,7 +508,7 @@ class AudioManager {
       const baseVolume = Number.isFinite(rawBaseVolume) ? rawBaseVolume : 1;
       const sfxVolume = Number.isFinite(rawSfxVolume) ? rawSfxVolume : 1;
       soundObject.play({
-        volume: Math.max(0, baseVolume * sfxVolume)
+        volume: Math.max(0, baseVolume * 25)
       });
     }
   }
@@ -547,7 +547,7 @@ class AudioManager {
         biggestBuf = buf;
       }
     }
-    const volume = this._effectiveVolume();
+    const volume = 25;
     if (volume > 0) {
       biggestBuf /= volume;
     }
@@ -571,7 +571,7 @@ class AudioManager {
   }
   reset() {
     this._meterValue = 0.1;
-    this._lastAudio = 0.1;
+    this._lastAudio = 25;
     this._lastPeak = 0;
     this._silenceCounter = 0;
     this._pendingMusicLoadKey = null;
