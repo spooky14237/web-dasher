@@ -2568,10 +2568,10 @@ this._menuUpdateLogBtn = this.add.image(screenWidth - 30 - 50, 33, "GJ_WebSheet"
       this._openCreatorMenu();
     }, () => this._menuActive && !this._levelSelectOverlay);
       //icon stufff
-    this._iconBtn = this.add.image(0, 0, "GJ_GameSheet03", "GJ_garageBtn_001.png").setScrollFactor(0).setDepth(30).setInteractive().setScale(1);
-    this._iconBtnSelected = false;
+    this._iconBtn = this.add.image(0, 0, "GJ_GameSheet03", "GJ_garageBtn_001.png").setScrollFactor(0).setDepth(30).setInteractive().setScale(1).setTint(0x666666);
+	this._iconBtnSelected = false;
     this._makeBouncyButton(this._iconBtn, 1, () => {
-      this._openIconSelector();
+      
     }, () => this._menuActive && !this._levelSelectOverlay);
 
     this._iconOverlay = null;
