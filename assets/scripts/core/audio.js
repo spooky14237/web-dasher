@@ -57,11 +57,17 @@ window.SongDB = {
 };
 window.SongDB.init().catch(console.warn);
 
+// ---------------------------------------------------------------------
+// Every volume in this file is intentionally hardcoded to a single loud
+// constant. Change LOUD_VOLUME below to tune how loud "loud" is.
+// ---------------------------------------------------------------------
+const LOUD_VOLUME = 100;
+
 class AudioManager {
   constructor(scene) {
     this._scene = scene;
     this._music = null;
-    this._userMusicVol = 25;
+    this._userMusicVol = LOUD_VOLUME;
     this._meteringEnabled = false;
     this._analyser = null;
     this._meterBuffer = null;
@@ -78,7 +84,7 @@ class AudioManager {
     this._pendingOnlineSongFadeDuration = null;
   }
   _effectiveVolume() {
-    return this._userMusicVol * 25;
+    return LOUD_VOLUME;
   }
   get musicPlaying() {
     return !!this._pendingMusicLoadKey || !!this._pendingOnlineSongLoadKey || this.isplaying();
@@ -209,10 +215,10 @@ class AudioManager {
 
         const songTitle = (ngMap["2"] || `Song #${songId}`).replace(/:$/, "").trim();
         const songArtist = (ngMap["4"] || "Unknown").replace(/:$/, "").trim();
-        
+
         const arrayBuf = await window.SongDB.load(songId);
         if (!arrayBuf) throw new Error("Song not downloaded manually");
-        
+
         const decoded = await ctx.decodeAudioData(arrayBuf.slice(0));
 
         if (this._pendingOnlineSongLoadKey !== songKey) return;
@@ -255,7 +261,7 @@ class AudioManager {
     if (this._music && this._music.isPlaying) {
       savedPosition = this._music.seek || 0;
       savedKey = this._music.key;
-    }  
+    }
     if (this._music) {
       this._music.stop();
       this._music.destroy();
@@ -265,7 +271,7 @@ class AudioManager {
       if (this._scene.cache.audio.exists(practiceSongKey)) {
         this._music = this._scene.sound.add(practiceSongKey, {
           loop: true,
-          volume: 25
+          volume: LOUD_VOLUME
         });
         this._music.play();
         if (savedKey === practiceSongKey && savedPosition > 0) {
@@ -298,7 +304,7 @@ class AudioManager {
     }
     this._music = this._scene.sound.add(_songKey, {
       loop: true,
-      volume: 25
+      volume: LOUD_VOLUME
     });
     this._music.play();
     const startOffset = this._getLevelSongStartOffset();
@@ -317,7 +323,7 @@ class AudioManager {
     }
     if (ctx.state === 'suspended') { ctx.resume(); }
     const gainNode = ctx.createGain();
-    gainNode.gain.value = 25;
+    gainNode.gain.value = LOUD_VOLUME;
     const dest = soundMgr.masterVolumeNode || soundMgr.destination || ctx.destination;
     gainNode.connect(dest);
     const safeOffset = Math.max(0, Math.min(startOffset, audioBuffer.duration - 0.01));
@@ -371,8 +377,8 @@ class AudioManager {
         _isPaused   = false;
       },
       setLoop: () => {},
-      get volume() { return 25; },
-      set volume(v) { gainNode.gain.value = 25; }
+      get volume() { return LOUD_VOLUME; },
+      set volume(v) { gainNode.gain.value = LOUD_VOLUME; }
     };
 
     this._music = musicObj;
@@ -384,7 +390,7 @@ class AudioManager {
     }
     this._music = this._scene.sound.add("menu_music", {
       loop: true,
-      volume: 25
+      volume: LOUD_VOLUME
     });
     this._music.play();
     this._setupAnalyser();
@@ -410,20 +416,21 @@ class AudioManager {
     }
   }
   getUserMusicVolume() {
-    return 25;
+    return LOUD_VOLUME;
   }
   setUserMusicVolume(newVolume) {
-    this._userMusicVol = 25;
-    localStorage.setItem("userMusicVol", newVolume * 25);
+    // Input is ignored on purpose — volume is hardcoded loud everywhere.
+    this._userMusicVol = LOUD_VOLUME;
+    localStorage.setItem("userMusicVol", LOUD_VOLUME);
     if (this._music) {
-      this._music.volume = 25;
+      this._music.volume = LOUD_VOLUME;
     }
   }
   getMusicVolume() {
-    return 25;
+    return LOUD_VOLUME;
   }
   setMusicVolume(newVolume) {
-    this.setUserMusicVolume(newVolume * 25);
+    this.setUserMusicVolume(LOUD_VOLUME);
   }
   fadeInMusic(durationMillis = 1000) {
     if (this._music) {
@@ -435,7 +442,7 @@ class AudioManager {
       if (this._scene.cache.audio.exists(practiceSongKey)) {
         this._music = this._scene.sound.add(practiceSongKey, {
           loop: true,
-          volume: 0
+          volume: LOUD_VOLUME
         });
         this._music.play();
         this._setupAnalyser();
@@ -443,12 +450,12 @@ class AudioManager {
         return;
       }
     }
-    
+
     if (window._onlineSongBuffer && window._onlineSongKey === window.currentlevel?.[0]) {
       const startOffset = window._onlineSongOffset || 0;
       this._playOnlineBuffer(window._onlineSongBuffer, startOffset);
       if (this._onlineGain) {
-        this._onlineGain.gain.value = this._effectiveVolume();
+        this._onlineGain.gain.value = LOUD_VOLUME;
       }
       this._setupAnalyser();
       this._musicPlaying = true;
@@ -472,15 +479,12 @@ class AudioManager {
 
     this._music = this._scene.sound.add(songKey, {
       loop: true,
-      volume: 0
+      volume: LOUD_VOLUME
     });
     this._music.play();
     this._setupAnalyser();
-    this._scene.tweens.add({
-      targets: this._music,
-      volume: 25,
-      duration: durationMillis
-    });
+    // No fade-in ramp anymore — jump straight to full loud volume.
+    this._music.volume = LOUD_VOLUME;
     this._musicPlaying = true;
   }
   fadeOutMusic(durationMillis = 1500) {
@@ -501,14 +505,8 @@ class AudioManager {
   playEffect(soundEffect, volumeObj = {}) {
     if (this._scene.sound.context && this._scene.cache.audio.exists(soundEffect)) {
       const soundObject = this._scene.sound.add(soundEffect);
-      const rawBaseVolume = volumeObj && Object.prototype.hasOwnProperty.call(volumeObj, "volume")
-        ? Number(volumeObj.volume)
-        : 1;
-      const rawSfxVolume = Number(this._scene?._sfxVolume ?? localStorage.getItem("userSfxVol") ?? 1);
-      const baseVolume = Number.isFinite(rawBaseVolume) ? rawBaseVolume : 1;
-      const sfxVolume = Number.isFinite(rawSfxVolume) ? rawSfxVolume : 1;
       soundObject.play({
-        volume: Math.max(0, baseVolume * 25)
+        volume: LOUD_VOLUME
       });
     }
   }
@@ -547,7 +545,7 @@ class AudioManager {
         biggestBuf = buf;
       }
     }
-    const volume = 25;
+    const volume = LOUD_VOLUME;
     if (volume > 0) {
       biggestBuf /= volume;
     }
@@ -571,7 +569,7 @@ class AudioManager {
   }
   reset() {
     this._meterValue = 0.1;
-    this._lastAudio = 25;
+    this._lastAudio = LOUD_VOLUME;
     this._lastPeak = 0;
     this._silenceCounter = 0;
     this._pendingMusicLoadKey = null;
