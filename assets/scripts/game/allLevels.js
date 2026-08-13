@@ -1,7 +1,7 @@
 window.allLevels = [
     [
-        "stereo_madness", // internal level name
-	    "Stereo Madness", // proper level name
+        "finger_madness", // internal level name
+	    "Fingerdash", // proper level name
 	    "level_1",        // level id in assets/levels
 	    ["RobTop", "Forever Bound"]   // person who made the level, person who made the song
     ],

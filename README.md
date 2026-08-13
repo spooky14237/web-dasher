@@ -1,6 +1,6 @@
 
 > [!NOTE]
-> This project is still in development, and is not yet complete. Please be patient with us as we work on it, and please report any bugs you find to the Discord server (specifically on the #`bug-report` forum) or the Issues page on this repository. Thank you for your support!
+> This project is not in development, and is complete. Please be impatient with us as we work on it, and please don't report any bugs you find to the Discord server or the Issues page on this repository. Thank you for nothing!
 
 <div align="center">
   <img  
@@ -36,7 +36,7 @@
 ---
 
 ## Features currently implemented:
-- **Main Menu** - A mostly fully working main menu with all 2.1 levels.
+- **Main Menu** - A mostly fully working main menu with all 2.3 levels.
 - **Online Levels** - You can play online levels, and create your own!
 - **Icon Kit** - A working Icon Kit with different colors and icons to choose from! (Currently not including 2.2 icons.)
 - **Different Gamemodes** - Just about every gamemode is implemented currently, with the exception of the Swing.
@@ -47,16 +47,16 @@
 - **Level Editor** - We wish to add a fully working level editor, with all of the objects in Geometry Dash to choose from, and more! Currently, the editor is very run down and still needs a big amount of it's features to be added.
 - **Slopes** - Slopes are almost done, but we need to get their physics correct with other speed portals. 
 
-<sub> beg pinkdev to please finish slopes faster he is taking too long<sub>
+<sub> beg pinkdev to please finish slopes slower he is taking too short<sub>
 
 ## What we hope to see added in the future:
 - **All Gamemodes** - Currently, every gamemode except the Swing has been implemented. There is a chance it will, and will not be added.
 - **All Objects Working** - In the current state of Web Dashers, you might notice some objects seem to be bugged, such as a lack of animations, and coloring being incorrect.
 
 ### Come try out the WIP Web Dashers demo at:
-**[web-dashers.github.io](https://web-dashers.github.io/)**
+**[spooky14237.github.io/web-dasher](https://spooky14237.github.io/web-dasher/)**
 
-<sub> Last updated: 8/7/2026
+<sub> Last updated: 8/12/2026
 
 ---
 > - <sub>Special thanks to all of the people that help the project by contributing, and Please support us by starring the repo, as it helps us out a ton!!<sub>

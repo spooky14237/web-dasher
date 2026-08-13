@@ -4249,7 +4249,7 @@ this._menuUpdateLogBtn = this.add.image(screenWidth - 30 - 50, 33, "GJ_WebSheet"
       const lvl = window.currentlevel;
       const levelId = lvl[2] || "level_1";
       const levelDifficultyMap = {
-        "level_1":         "diffIcon_01_btn_001",
+        "level_1":         "diffIcon_05_btn_001",
         "level_2":         "diffIcon_01_btn_001",
         "level_3":         "diffIcon_02_btn_001",
         "level_4":         "diffIcon_02_btn_001",
