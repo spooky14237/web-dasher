@@ -444,7 +444,7 @@ class GameScene extends Phaser.Scene {
       { frame: "gj_twIcon_001.png",      url: "https://x.com/rohanis0000gd",                          angle: 0, flipX: false, row: 1, col: 0 },
       { frame: "gj_ytIcon_001.png",      url: "https://www.youtube.com/@rohanis0000gd",               angle: 0,                row: 1, col: 1 },
       { frame: "gj_tiktokIcon_001.png",  url: "https://www.tiktok.com/@rohanis00000",                 angle: 0, flipX: false, row: 1, col: 2 },
-      { frame: "gj_githubIcon_001.png",  url: "https://github.com/web-dashers/web-dashers.github.io", angle: 0,                row: 1, col: 3 },
+      { frame: "gj_githubIcon_001.png",  url: "https://github.com/spooky14237/web-dasher", angle: 0,                row: 1, col: 3 },
 
       {frame:  "",                       url: "",                                                     angle: 0,                row: 2, col: 0 },
       {frame:  "",                       url: "",                                                     angle: 0,                row: 2, col: 1 },
@@ -6074,29 +6074,11 @@ _buildSettingsPopup() {
     */
     const updateEntries = [
       { text: "Update Log", scale: 1, font: "goldFont" },
-      { text: "Credits menu fixed :3", scale: 0.75, },
-      { text: "Small Icon Kit changes", scale: 0.75, },
-      { text: "Low Detail Mode", scale: 0.75, },
-      { text: "Object culling changes", scale: 0.75, },
-      { text: "MOST Animated objects", scale: 0.75, },
-      { text: "Added a bunch of missing buttons", scale: 0.7, },
-      { text: "Level select info icon is bouncy now", scale: 0.65, },
-      { text: "Rotation for deco and saws", scale: 0.75, },
-      { text: "Particlesheet added <3", scale: 0.75, },
-      { text: "Better ball rotation ", scale: 0.75, },
-      { text: "Fixed ball noclip too.", scale: 0.75, },
-      { text: "Editor placing offsets", scale: 0.75, },
-      { text: "Pulsing rods reworked a lil", scale: 0.75, },
-      { text: "Breakable blocks break now.", scale: 0.75, },
-      { text: "Fixed objects not showing in editor", scale: 0.65, },
-      { text: "^ I, Amethyst, did all this btw. ^", scale: 0.6, color: 0x9966cc},
-      { text: "Slopes (very buggy)", scale: 0.75, color: 0xff9944 },
-      { text: "THEY WILL BE FIXED-", scale: 0.75, },
-      { text: "OVER TIME.", scale: 0.75, },
-      { text: "Slopes work in imported-", scale: 0.75, },
-      { text: "levels now (thanks lasokadadyy)", scale: 0.7, },
-      { text: "Fixed SOME objects", scale: 0.75 },
-      { text: "-pinkdih", scale: 0.65, color: 0xFF008E }
+	  { text: "Make Stereo Madness better", scale: 0.75, },
+	  { text: "Disable icon garage", scale: 0.75, },
+	  { text: "Change default icon", scale: 0.75, },
+      { text: "Made game more easy to hear", scale: 0.75, },
+      { text: "-spooky", scale: 0.65, color: 0xFF008E }
     ]; 
     let yPos = 0;
     const lineItems = [];
@@ -8933,7 +8915,7 @@ _applyMirrorEffect() {
       url: "https://discord.gg/TfEzAVWPSJ"
     }, {
       key: "downloadSteam_001",
-      url: "https://github.com/web-dashers/web-dashers.github.io"
+      url: "https://github.com/spooky14237/web-dasher"
     }];
     for (let _0x10f8cc = 0; _0x10f8cc < _0x34b1bd.length; _0x10f8cc++) {
       const _0xd7310b = _0x34b1bd[_0x10f8cc];
