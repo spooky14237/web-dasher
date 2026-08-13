@@ -6076,9 +6076,9 @@ _buildSettingsPopup() {
       { text: "Update Log", scale: 1, font: "goldFont" },
 	  { text: "Make Stereo Madness better", scale: 0.75, },
 	  { text: "Disable icon garage", scale: 0.75, },
-	  { text: "Change default icon", scale: 0.75, },
+	  { text: "Change default icon and color", scale: 0.75, },
       { text: "Made game more easy to hear", scale: 0.75, },
-      { text: "-spooky", scale: 0.65, color: 0xFF008E }
+      { text: "- spooky", scale: 0.65, color: 0xFF7B08 }
     ]; 
     let yPos = 0;
     const lineItems = [];
