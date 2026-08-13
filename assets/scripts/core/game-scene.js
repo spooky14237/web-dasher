@@ -4856,11 +4856,6 @@ _buildPauseOverlay() {
         });
     };
 
-    createSlider(textureY - 200, "gj_songIcon_001.png", this._audio.getUserMusicVolume(), v => this._audio.setUserMusicVolume(v));
-    createSlider(textureY + 200, "GJ_sfxIcon_001.png", this._sfxVolume, v => {
-        this._sfxVolume = v;
-        localStorage.setItem("userSfxVol", v);
-    });
  }
 _buildSettingsPopup() {
     if (this._settingsPopup) return;
@@ -9107,7 +9102,8 @@ _applyMirrorEffect() {
     
     const checkboxY = sliderStartY - 10;
     const checkboxX = containerX + 280;
-    
+    this._settingsLayerInternal.add(this.add.bitmapText(checkboxX, checkboxY - 42, "bigFont", "Menu", 20).setOrigin(0.5, 0.5));
+    this._settingsLayerInternal.add(this.add.bitmapText(checkboxX, checkboxY - 22, "bigFont", "Music", 20).setOrigin(0.5, 0.5));
 
     const getMenuMusicEnabled = () => {
         const saved = localStorage.getItem("menuMusicEnabled");
